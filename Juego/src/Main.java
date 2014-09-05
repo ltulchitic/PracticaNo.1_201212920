@@ -114,7 +114,7 @@ public class Main {
     
     public void Menu(){
         
-        System.out.println("- = Bienvenido a Love Letter = - ");
+        System.out.println("- = Bienvenido a Love Letter = - \n");
         System.out.println("(1)JUGAR UNA PARTIDA");
         System.out.println("(2)SELECCIONAR EL NUMERO DE TOKENS A JUGAR");
         System.out.println("(3)MOSTRAR LAS REGLAS DEL JUEGO");
@@ -138,7 +138,8 @@ public class Main {
         }else if(a==2){
             //Numero tokens
         }else if(a==3){
-            //Reglas
+            Reglas rule = new Reglas();
+            rule.rules();
         }else if(a==4){
             System.exit(0);
         }
@@ -167,7 +168,7 @@ public class Main {
            		maquina.cartaCpu.add(cartaMazo.get(cartaMazo.size()-1));
            		maquina.setCarta2(maquina.cartaCpu.get(1).getNombre());
            		cartaMazo.remove(cartaMazo.size()-1);
-           		turnoJugador(player,maquina,turno);
+           		turnoJugadores(player,maquina,turno);
            	}else if(turno==0){
            		player.cartaJugador.add(cartaMazo.get(cartaMazo.size()-1));
            		player.setCarta2(player.cartaJugador.get(1).getNombre());
@@ -175,7 +176,7 @@ public class Main {
            		maquina.cartaCpu.add(cartaMazo.get(cartaMazo.size()-1));
            		maquina.setCarta2(maquina.cartaCpu.get(1).getNombre());
            		cartaMazo.remove(cartaMazo.size()-1);
-           		turnoJugador(player,maquina,turno);
+           		turnoJugadores(player,maquina,turno);
            	}
            	
            	
@@ -190,7 +191,7 @@ public class Main {
        		maquina.cartaCpu.add(cartaMazo.get(cartaMazo.size()-1));
        		maquina.setCarta2(maquina.cartaCpu.get(1).getNombre());
        		cartaMazo.remove(cartaMazo.size()-1);
-       		turnoJugador(player,maquina,turno);
+       		turnoJugadores(player,maquina,turno);
        	}else if(turno==0){
        		player.cartaJugador.add(cartaMazo.get(cartaMazo.size()-1));
        		player.setCarta2(player.cartaJugador.get(1).getNombre());
@@ -198,7 +199,7 @@ public class Main {
        		maquina.cartaCpu.add(cartaMazo.get(cartaMazo.size()-1));
        		maquina.setCarta2(maquina.cartaCpu.get(1).getNombre());
        		cartaMazo.remove(cartaMazo.size()-1);
-       		turnoJugador(player,maquina,turno);
+       		turnoJugadores(player,maquina,turno);
        	}
        	
         }
@@ -228,7 +229,7 @@ public class Main {
 
     public void darCarta(Jugador jugador,CPU cpu) {
         
-        jugador.cartaJugador.add(cartaMazo.get(12));
+        jugador.cartaJugador.add(cartaMazo.get(8));
         jugador.setCarta1(jugador.cartaJugador.get(0).getNombre());
         cartaMazo.remove(12);
         
@@ -243,7 +244,9 @@ public class Main {
         
     }
     
-    public void turnoJugador(Jugador jugador,CPU cpu,int turno){
+    
+    
+    public void turnoJugadores(Jugador jugador,CPU cpu,int turno){
         
         
         System.out.println("Nombre del Jugador 1: "+jugador.getNombre()+"         Nombre del Jugador 2: "+cpu.getNombre());
@@ -267,24 +270,14 @@ public class Main {
         System.out.println("(3)Terminar Juego");
         Scanner sc=new Scanner(System.in);
         int opcion=sc.nextInt();
+        
         	
         	if(opcion==1){
+        		
         		nombreCartaJugada1 = jugador.getCarta1();
-        		if(nombreCartaJugada1.equals("PRINCESS")){
-        			perdioJugador=true;
-        			turnoJugador(jugador,cpu,cambiarTurno(turno));
-        			
-        		}else if(nombreCartaJugada1.equals("KING")){
+        		
+        		if(nombreCartaJugada1.equals("GUARD")){
         			jugador.cartaJugador.remove(0);
-        			jugador.cartaJugador.add(0, cpu.cartaCpu.get(0));
-        			cpu.cartaCpu.remove(0);
-        			cpu.cartaCpu.add(0, jugador.cartaJugador.get(1));
-        			jugador.cartaJugador.remove(1);
-        			jugador.cartaJugador.add(cpu.cartaCpu.get(1));
-        			cpu.cartaCpu.remove(1);
-        			turnoJugador(jugador,cpu,cambiarTurno(turno));
-        			
-        		}else if(nombreCartaJugada1.equals("GUARD")){
         			System.out.println("ELIJE UNA CARTA");
         			System.out.println("(2)PRIEST\n"
         					+ "(3)BARON\n"
@@ -294,21 +287,191 @@ public class Main {
         					+ "(7)GUARD\n"
         					+ "(8)PRINCESS\n");
         			opcion=sc.nextInt();
-        			
+                        
         			if(opcion==cpu.cartaCpu.get(0).getNumero()){
         				perdioRival=true;
-        				turnoJugador(jugador,cpu,cambiarTurno(turno));
+        				turnoJugadores(jugador,cpu,cambiarTurno(turno));
         			}else if(opcion==cpu.cartaCpu.get(1).getNumero()){
         				perdioRival=true;
-        				turnoJugador(jugador,cpu,cambiarTurno(turno));
+        				turnoJugadores(jugador,cpu,cambiarTurno(turno));
         			}else{
         				
         			}
+        		
+        		}else if(nombreCartaJugada1.equals("PRIEST")){
+        			jugador.cartaJugador.remove(0);
+        			 String cartar1 = cpu.cartaCpu.get(0).getNombre();
+        			 String cartar2 = cpu.cartaCpu.get(1).getNombre();
+        			System.out.println("LAS CARTAS DEL RIVAL SON: "+ cartar1 +" Y "+cartar2);
+        			    turnoJugadores(jugador,cpu,cambiarTurno(turno));
         			
-        		}
+        		
+        		
+        		
+        		}else if(nombreCartaJugada1.equals("BARON")){
+        			   jugador.cartaJugador.remove(0);
+        		       int cartar1 = cpu.cartaCpu.get(0).getNumero();
+       			       int cartar2 = cpu.cartaCpu.get(1).getNumero();
+       			       int cartaj2 = jugador.cartaJugador.get(1).getNumero();
+        			if((cartaj2<cartar2) || (cartaj2<cartar1) ){
+        				perdioJugador=true;
+            			turnoJugadores(jugador,cpu,cambiarTurno(turno));
+                   }else if((cartaj2>cartar2) || (cartaj2>cartar1) ){
+                	    perdioRival=true;
+       				    turnoJugadores(jugador,cpu,cambiarTurno(turno));
+                	   
+                   }
+        			
+        		}else if(nombreCartaJugada1.equals("HANDMAID")){
+        			jugador.cartaJugador.remove(0);
+        			
+        			
+        			
+        			
+        			
+        		}else if(nombreCartaJugada1.equals("PRINCE")){
+        			jugador.cartaJugador.remove(0);
+        			System.out.println("ELIGA A QUIEN BOTAR LA MANO: \n"
+        		                                  +"(1)" +jugador.getNombre()+"O \n"+
+        		                                  "(2)" +cpu.getNombre());
+        			Scanner ele= new Scanner(System.in);
+        			int e= ele.nextInt();
+        			if(e == 1)
+        			    jugador.cartaJugador.remove(1);	
+        			else if(e == 2){
+        				cpu.cartaCpu.remove(0);
+        				cpu.cartaCpu.remove(1);
+        			}
+        			turnoJugadores(jugador,cpu,cambiarTurno(turno));
+        		
+        		
+        		}else if(nombreCartaJugada1.equals("KING")){
+        			jugador.cartaJugador.remove(0);
+        			jugador.cartaJugador.add(0, cpu.cartaCpu.get(0));
+        			cpu.cartaCpu.remove(0);
+        			cpu.cartaCpu.add(0, jugador.cartaJugador.get(1));
+        			jugador.cartaJugador.remove(1);
+        			jugador.cartaJugador.add(1,cpu.cartaCpu.get(1));
+        			cpu.cartaCpu.remove(1);
+        			turnoJugadores(jugador,cpu,cambiarTurno(turno));
+        			
+        		}else if(nombreCartaJugada1.equals("PRINCESS")){
+        			jugador.cartaJugador.remove(0);
+        			perdioJugador=true;
+        			turnoJugadores(jugador,cpu,cambiarTurno(turno));
+        			
+        		} 
         	}
+        	
+        	
+          
+        	else if(opcion==2){
+        		
+        		nombreCartaJugada2 = jugador.getCarta2();
+        		
+        		if(nombreCartaJugada2.equals("GUARD")){
+        			jugador.cartaJugador.remove(1);
+        			System.out.println("ELIJE UNA CARTA");
+        			System.out.println("(2)PRIEST\n"
+        					+ "(3)BARON\n"
+        					+ "(4)HANDMAID\n"
+        					+ "(5)PRINCE\n"
+        					+ "(6)KING\n"
+        					+ "(7)GUARD\n"
+        					+ "(8)PRINCESS\n");
+        			opcion=sc.nextInt();
+                        
+        			if(opcion==cpu.cartaCpu.get(0).getNumero()){
+        				perdioRival=true;
+        				turnoJugadores(jugador,cpu,cambiarTurno(turno));
+        			}else if(opcion==cpu.cartaCpu.get(1).getNumero()){
+        				perdioRival=true;
+        				turnoJugadores(jugador,cpu,cambiarTurno(turno));
+        			}else{
+        				
+        			}
+        		
+        		}else if(nombreCartaJugada2.equals("PRIEST")){
+        			jugador.cartaJugador.remove(1);
+        			 String cartar1 = cpu.cartaCpu.get(0).getNombre();
+        			 String cartar2 = cpu.cartaCpu.get(1).getNombre();
+        			System.out.println("LAS CARTAS DEL RIVAL SON: "+ cartar1 +" Y "+cartar2);
+        			    turnoJugadores(jugador,cpu,cambiarTurno(turno));
+        			
+        		
+        		
+        		
+        		}else if(nombreCartaJugada2.equals("BARON")){
+        			   jugador.cartaJugador.remove(1);
+        		       int cartar1 = cpu.cartaCpu.get(0).getNumero();
+       			       int cartar2 = cpu.cartaCpu.get(1).getNumero();
+       			       int cartaj1 = jugador.cartaJugador.get(0).getNumero();
+        			if((cartaj1<cartar2) || (cartaj1<cartar1) ){
+        				perdioJugador=true;
+            			turnoJugadores(jugador,cpu,cambiarTurno(turno));
+                   }else if((cartaj1>cartar2) || (cartaj1>cartar1) ){
+                	    perdioRival=true;
+       				    turnoJugadores(jugador,cpu,cambiarTurno(turno));
+                	   
+                   }
+        			
+        		}else if(nombreCartaJugada2.equals("HANDMAID")){
+        			jugador.cartaJugador.remove(1);
+        			
+        			
+        			
+        			
+        			
+        		}else if(nombreCartaJugada2.equals("PRINCE")){
+        			jugador.cartaJugador.remove(1);
+        			System.out.println("ELIGA A QUIEN BOTAR LA MANO: \n"
+        		                                  +"(1)" +jugador.getNombre()+" \n"+
+        		                                  "(2)" +cpu.getNombre());
+        			Scanner ele= new Scanner(System.in);
+        			int e= ele.nextInt();
+        			if(e == 1)
+        			    jugador.cartaJugador.remove(0);	
+        			else if(e == 2){
+        				cpu.cartaCpu.remove(0);
+        				cpu.cartaCpu.remove(1);
+        			}
+        			turnoJugadores(jugador,cpu,cambiarTurno(turno));
+        		
+        		
+        		}else if(nombreCartaJugada2.equals("KING")){
+        			jugador.cartaJugador.remove(1);
+        			jugador.cartaJugador.add(1, cpu.cartaCpu.get(1));
+        			cpu.cartaCpu.remove(1);
+        			cpu.cartaCpu.add(0, jugador.cartaJugador.get(0));
+        			jugador.cartaJugador.remove(0);
+        			jugador.cartaJugador.add(0,cpu.cartaCpu.get(0));
+        			cpu.cartaCpu.remove(0);
+        			turnoJugadores(jugador,cpu,cambiarTurno(turno));
+        			
+        		}else if(nombreCartaJugada2.equals("PRINCESS")){
+        			jugador.cartaJugador.remove(1);
+        			perdioJugador=true;
+        			turnoJugadores(jugador,cpu,cambiarTurno(turno));
+        			
+        		} 
+        	}else{
+        		System.out.println("SALIENDO DEL JUEGO........");
+        		System.exit(0);
+        		
+        		
+        	}
+        	
+        	
+        	
         	}
         }
+        
+        
+        
+        
+        
+        
+        
         else if(turno==0){
         	if(perdioJugador==true){
         		System.out.println("Ha ganado El Rival");
