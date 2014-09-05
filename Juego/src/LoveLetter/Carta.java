@@ -1,10 +1,11 @@
+package LoveLetter;
 
 public class Carta {
     
     String Nombre;
     int numero;
     String Accion;
-   
+    
     public Carta(){
         
     }

@@ -1,17 +1,17 @@
-
+package LoveLetter;
 import java.util.ArrayList;
 
 
-public class CPU {
+public class Jugador {
     
     String nombre="";
-    int tokenGanar=0;
+    int tokenGanados=0;
     String carta1="";
     String carta2="";
     boolean handmaid=false;
-    ArrayList<Carta> cartaCpu=new ArrayList<Carta>();
+    ArrayList<Carta> cartaJugador=new ArrayList<Carta>();
     
-    public CPU(){
+    public Jugador(){
         
     }
 
@@ -32,12 +32,12 @@ public class CPU {
         this.nombre = nombre;
     }
 
-    public int getTokenGanar() {
-        return tokenGanar;
+    public int getTokenGanados() {
+        return tokenGanados;
     }
 
-    public void setTokenGanar(int tokenGanar) {
-        this.tokenGanar = tokenGanar;
+    public void setTokenGanados(int tokenGanados) {
+        this.tokenGanados = tokenGanados;
     }
 
     public String getCarta1() {
@@ -56,6 +56,7 @@ public class CPU {
         this.carta2 = carta2;
     }
 
+    
     
     
     

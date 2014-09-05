@@ -1,6 +1,12 @@
+package LoveLetter;
+import java.util.Scanner;
 
-public class Reglas {
-	public Reglas(){
+
+public class Rules {
+	
+	Main principal;
+	public Scanner opc;
+public Rules(){
 		
 	}
 	
@@ -146,6 +152,17 @@ public class Reglas {
         +"TEMPEST\n"
         
         +"Original Concept: Mark Wootton, John Zinser Brand Management: Edward Bolme Fiction: Seth Mason\n");
+		
+		System.out.println("(1)para regresar a menu");
+		opc = new Scanner(System.in);
+		int opcion = opc.nextInt();
+		if(opcion == 1){		
+		principal=new Main();
+		principal.Menu();
+		}
+		else{
+			
+		}
 	}
 	
 	
